@@ -9,6 +9,8 @@ from sklearn.tree import DecisionTreeRegressor
 ################################
 ### ADD EXTRA LIBRARIES HERE ###
 ################################
+from sklearn import cross_validation
+from sklearn import metrics
 
 
 def load_data():
@@ -31,12 +33,33 @@ def explore_city_data(city_data):
 
     # Please calculate the following values using the Numpy library
     # Size of data (number of houses)?
+    size_of_data = len(housing_features)
+    print "size_of_data: %d" % size_of_data
+
     # Number of features?
+    number_of_features = len(housing_features[0])
+    print "number_of_features: %d" % number_of_features
+
     # Minimum price?
+    minimum_price = housing_prices.min()
+    print "minimum_price: %4.2f" % minimum_price
+
     # Maximum price?
+    maximum_price = housing_prices.max()
+    print "maximum_price: %4.2f" % maximum_price
+
     # Calculate mean price?
+    mean_price = np.mean(housing_prices)
+    print "mean_price: %4.2f" % mean_price
+
     # Calculate median price?
+    median_price = np.median(housing_prices)
+    print "median_price: %4.2f" % median_price
+
     # Calculate standard deviation?
+    std_price = np.std(housing_prices)
+    print "std_price: %4.2f" % std_price
+
 
 
 def split_data(city_data):
@@ -48,6 +71,8 @@ def split_data(city_data):
     ###################################
     ### Step 2. YOUR CODE GOES HERE ###
     ###################################
+    X_train, X_test, y_train, y_test = \
+	cross_validation.train_test_split(X, y, test_size=0.3, random_state=1018)
 
     return X_train, y_train, X_test, y_test
 
@@ -61,8 +86,8 @@ def performance_metric(label, prediction):
 
     # The following page has a table of scoring functions in sklearn:
     # http://scikit-learn.org/stable/modules/classes.html#sklearn-metrics-metrics
-    pass
-
+    
+    return metrics.mean_squared_error(label, prediction)
 
 def learning_curve(depth, X_train, y_train, X_test, y_test):
     """Calculate the performance of the model after a set of training data."""
@@ -177,7 +202,8 @@ def fit_predict_model(city_data):
     print "House: " + str(x)
     print "Prediction: " + str(y)
 
-In the case of the documentation page for GridSearchCV, it might be the case that the example is just a demonstration of syntax for use of the function, rather than a statement about 
+# In the case of the documentation page for GridSearchCV, it might be the case that the example is just a demonstration of syntax for use of the function, rather than a statement about 
+
 def main():
     """Analyze the Boston housing data. Evaluate and validate the
     performanance of a Decision Tree regressor on the housing data.
@@ -198,11 +224,13 @@ def main():
         learning_curve(max_depth, X_train, y_train, X_test, y_test)
 
     # Model Complexity Graph
-    model_complexity(X_train, y_train, X_test, y_test)
+    ## MRA model_complexity(X_train, y_train, X_test, y_test)
 
     # Tune and predict Model
-    fit_predict_model(city_data)
+    ## MRA fit_predict_model(city_data)
 
 
 if __name__ == "__main__":
     main()
+
+## MRA For this assignment your client has a house with the following feature set: [11.95, 0.00, 18.100, 0, 0.6590, 5.6090, 90.00, 1.385, 24, 680.0, 20.20, 332.09, 12.13]
