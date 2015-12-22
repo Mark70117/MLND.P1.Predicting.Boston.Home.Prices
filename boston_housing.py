@@ -1,10 +1,16 @@
 """Load the Boston dataset and examine its target (label) distribution."""
 
+# Project 1 Udacity Machine Learning Nanodegree
+# Mark Anderson
+# https://github.com/Mark70117
+# https://www.linkedin.com/in/mark-anderson-4b702718
+
 # Load libraries
 import numpy as np
 import pylab as pl
 from sklearn import datasets
 from sklearn.tree import DecisionTreeRegressor
+from sklearn import grid_search
 
 ################################
 ### ADD EXTRA LIBRARIES HERE ###
@@ -186,15 +192,27 @@ def fit_predict_model(city_data):
     # 1. Find an appropriate performance metric. This should be the same as the
     # one used in your performance_metric procedure above:
     # http://scikit-learn.org/stable/modules/generated/sklearn.metrics.make_scorer.html
+    scorer = metrics.make_scorer(performance_metric, greater_is_better=False)
 
     # 2. We will use grid search to fine tune the Decision Tree Regressor and
     # obtain the parameters that generate the best training performance. Set up
     # the grid search object here.
     # http://scikit-learn.org/stable/modules/generated/sklearn.grid_search.GridSearchCV.html#sklearn.grid_search.GridSearchCV
+    
+    reg = grid_search.GridSearchCV(regressor, parameters, scoring=scorer, verbose=100)
 
     # Fit the learner to the training data to obtain the best parameter set
     print "Final Model: "
     print reg.fit(X, y)
+
+    print "grid_scores_:"
+    print reg.grid_scores_
+    print "best_estimator_:"
+    print reg.best_estimator_
+    print "best_params_:"
+    print reg.best_params_
+    print "best_score_"
+    print reg.best_score_
     
     # Use the model to predict the output of a particular sample
     x = [11.95, 0.00, 18.100, 0, 0.6590, 5.6090, 90.00, 1.385, 24, 680.0, 20.20, 332.09, 12.13]
@@ -224,13 +242,12 @@ def main():
         learning_curve(max_depth, X_train, y_train, X_test, y_test)
 
     # Model Complexity Graph
-    ## MRA model_complexity(X_train, y_train, X_test, y_test)
+    model_complexity(X_train, y_train, X_test, y_test)
 
     # Tune and predict Model
-    ## MRA fit_predict_model(city_data)
+    fit_predict_model(city_data)
 
 
 if __name__ == "__main__":
     main()
 
-## MRA For this assignment your client has a house with the following feature set: [11.95, 0.00, 18.100, 0, 0.6590, 5.6090, 90.00, 1.385, 24, 680.0, 20.20, 332.09, 12.13]
