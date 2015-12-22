@@ -1,7 +1,7 @@
 # P1: Predicting Boston Housing Prices // Udacity Machine Learning Nanodegree
 ### Mark Anderson
- * https://github.com/Mark70117
- * https://www.linkedin.com/in/mark-anderson-4b702718
+ * [github](https://github.com/Mark70117)
+ * [linkedin](https://www.linkedin.com/in/mark-anderson-4b702718)
 
 ## Synopsis
 
@@ -92,12 +92,12 @@ the data set, but given its location near the center of the data
 the prediction doesn't seem all that spectacular.
 
 
-## Notes [1] [dataset
-archive](http://archive.ics.uci.edu/ml/datasets/Housing).  Harrison,
+## Notes 
+[1] 
+[dataset archive](http://archive.ics.uci.edu/ml/datasets/Housing).  Harrison,
 D. and Rubinfeld, D.L.  'Hedonic prices and the demand for clean
-air', J. Environ. Economics & Management, vol.5, 81-102, 1978.  [pdf
-of original
-paper](http://www.colorado.edu/ibs/crs/workshops/R_1-11-2012/root/Harrison_1978.pdf)
+air', J. Environ. Economics & Management, vol.5, 81-102, 1978.  
+[pdf of original paper](http://www.colorado.edu/ibs/crs/workshops/R_1-11-2012/root/Harrison_1978.pdf)
 
 [2]
 http://scikit-learn.org/stable/modules/generated/sklearn.grid_search.GridSearchCV.html
