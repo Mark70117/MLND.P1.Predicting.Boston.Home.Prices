@@ -78,7 +78,7 @@ def split_data(city_data):
     ### Step 2. YOUR CODE GOES HERE ###
     ###################################
     X_train, X_test, y_train, y_test = \
-	cross_validation.train_test_split(X, y, test_size=0.3, random_state=1018)
+	cross_validation.train_test_split(X, y, test_size=0.3, random_state=1019)
 
     return X_train, y_train, X_test, y_test
 
@@ -92,7 +92,7 @@ def performance_metric(label, prediction):
 
     # The following page has a table of scoring functions in sklearn:
     # http://scikit-learn.org/stable/modules/classes.html#sklearn-metrics-metrics
-    
+
     return metrics.mean_squared_error(label, prediction)
 
 def learning_curve(depth, X_train, y_train, X_test, y_test):
@@ -198,29 +198,23 @@ def fit_predict_model(city_data):
     # obtain the parameters that generate the best training performance. Set up
     # the grid search object here.
     # http://scikit-learn.org/stable/modules/generated/sklearn.grid_search.GridSearchCV.html#sklearn.grid_search.GridSearchCV
-    
-    reg = grid_search.GridSearchCV(regressor, parameters, scoring=scorer, verbose=100)
+
+    reg = grid_search.GridSearchCV(regressor, parameters, scoring=scorer)
 
     # Fit the learner to the training data to obtain the best parameter set
     print "Final Model: "
     print reg.fit(X, y)
 
-    print "grid_scores_:"
-    print reg.grid_scores_
-    print "best_estimator_:"
-    print reg.best_estimator_
     print "best_params_:"
     print reg.best_params_
-    print "best_score_"
-    print reg.best_score_
-    
+
     # Use the model to predict the output of a particular sample
     x = [11.95, 0.00, 18.100, 0, 0.6590, 5.6090, 90.00, 1.385, 24, 680.0, 20.20, 332.09, 12.13]
     y = reg.predict(x)
     print "House: " + str(x)
     print "Prediction: " + str(y)
 
-# In the case of the documentation page for GridSearchCV, it might be the case that the example is just a demonstration of syntax for use of the function, rather than a statement about 
+# In the case of the documentation page for GridSearchCV, it might be the case that the example is just a demonstration of syntax for use of the function, rather than a statement about
 
 def main():
     """Analyze the Boston housing data. Evaluate and validate the
