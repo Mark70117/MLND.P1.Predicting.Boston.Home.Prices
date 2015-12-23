@@ -124,7 +124,13 @@ a realtor setting a listing price on a home.  Given the datasets
 mean of $22,530 and standard deviation of $9,190, the prediction
 looks to be somewhat better that randomly picking a value from the
 data set, but given its location near the center of the data the
-prediction doesn't seem all that spectacular.
+prediction doesn't seem all that spectacular.  Incorporating a Pro
+Tip from a Udacity reviewer, the prices of the 10 nearest neighbors
+to the features of predicted house were identified and averaged.
+For 10 runs of prediction the predicted price was an average of
+6.25% different from the average of the 10 neighbors.  So the
+predictions were both internally consistent with each other and
+consistent with similar points from the data set.
 
 
 ## Notes [1] [dataset
