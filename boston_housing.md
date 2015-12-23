@@ -70,17 +70,29 @@ predictive power and model complexity.
 ## Analyzing Model Performance
 
 Examining the learning curves one see a general trend as the training
-size increases.  The error for the training set tend to continue
-to decrease.  The error of the test set, however, tends to decline
-at first, but then fluctuate erratically around a lower bound.  This
-indicates beyond a certain point, more data, just leads to overfitting
-the specific data given instead of more generally modeling the
-feature space.
+size increases.  The error for the training set tends to continue
+to increase wth training size increases.  The training error is
+highest at the lower values of max depth, and while the absolute
+amount of the training error decreases with increases in max depth
+value, the upward trend of higher error as training size increases
+persists.
+
+The error of the test set, however, tends to decline for a period,
+after some initial rapid fluctuations, but then fluctuate erratically
+around a lower bound as the training size increases beyond a certain
+point.  For all values of the max depth, the test set error seems
+smoothest in the region between training set size of 125 to 175.
+Especially for higher values of max depth, the fluctuations increase
+in magnitude as training size increases beyond 175. This indicates
+beyond a certain point, more data, just leads to overfitting the
+specific data given instead of more generally modeling the feature
+space.
 
 Examining the Performance vs Training Size graph for max depth of
 1, the model shows signs of under fitting.  A larger training size
 produces more error, evidence that the additional data is overwhelming
-the ability of the model to capture the complexity, hence under fitting.
+the ability of the model to capture the complexity, hence under
+fitting.
 
 Examining the Performance vs Training Size graph for max depth of
 10, the model shows signs of over fitting.  A larger training size
@@ -97,26 +109,26 @@ between complexity and minimizing error.
 
 ## Model Prediction
 
-The random state of the test-train split was varied 10 times.
-The mean/median/std of the predicted value were 20.76/20.97/1.095.
-The mean/mode of the max depth chosen by GridSearchCV were 5.8/4.
+The random state of the test-train split was varied 10 times.  The
+mean/median/std of the predicted value were 20.76/20.97/1.095.  The
+mean/mode of the max depth chosen by GridSearchCV were 5.8/4.
 
 There is some variation in the predicted value but it seems well
 centered around $20,800.  The RMSE of the model was approximately
 $5,900.  So at the prediction could be used as a starting point for
 a realtor setting a listing price on a home.  Given the datasets
 mean of $22,530 and standard deviation of $9,190, the prediction
-looks to be somewhat better that randomly picking a value from
-the data set, but given its location near the center of the data
-the prediction doesn't seem all that spectacular.
+looks to be somewhat better that randomly picking a value from the
+data set, but given its location near the center of the data the
+prediction doesn't seem all that spectacular.
 
 
-## Notes
-[1]
-[dataset archive](http://archive.ics.uci.edu/ml/datasets/Housing).  Harrison,
+## Notes [1] [dataset
+archive](http://archive.ics.uci.edu/ml/datasets/Housing).  Harrison,
 D. and Rubinfeld, D.L.  'Hedonic prices and the demand for clean
-air', J. Environ. Economics & Management, vol.5, 81-102, 1978.
-[pdf of original paper](http://www.colorado.edu/ibs/crs/workshops/R_1-11-2012/root/Harrison_1978.pdf)
+air', J. Environ. Economics & Management, vol.5, 81-102, 1978.  [pdf
+of original
+paper](http://www.colorado.edu/ibs/crs/workshops/R_1-11-2012/root/Harrison_1978.pdf)
 
 [2]
 http://scikit-learn.org/stable/modules/generated/sklearn.grid_search.GridSearchCV.html
