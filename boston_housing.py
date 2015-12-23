@@ -17,6 +17,7 @@ from sklearn import grid_search
 ################################
 from sklearn import cross_validation
 from sklearn import metrics
+from sklearn import neighbors   # Pro Tip from Reviewer Comments
 
 
 def load_data():
@@ -78,7 +79,7 @@ def split_data(city_data):
     ### Step 2. YOUR CODE GOES HERE ###
     ###################################
     X_train, X_test, y_train, y_test = \
-	cross_validation.train_test_split(X, y, test_size=0.3, random_state=1019)
+	cross_validation.train_test_split(X, y, test_size=0.3, random_state=1012)
 
     return X_train, y_train, X_test, y_test
 
@@ -173,6 +174,13 @@ def model_complexity_graph(max_depth, train_err, test_err):
     pl.ylabel('Error')
     pl.show()
 
+# Pro Tip from Reviewer Comments
+def find_nearest_neighbor_indexes(x, X):  # x is your vector and X is the data set.
+    neigh = neighbors.NearestNeighbors( n_neighbors = 10 )
+    neigh.fit( X)
+    distance, indexes = neigh.kneighbors( x )
+    return indexes
+
 
 def fit_predict_model(city_data):
     """Find and tune the optimal model. Make a prediction on housing data."""
@@ -214,7 +222,19 @@ def fit_predict_model(city_data):
     print "House: " + str(x)
     print "Prediction: " + str(y)
 
+    # Pro Tip from Reviewer Comments
+    indexes = find_nearest_neighbor_indexes(x, X)
+    sum_prices = []
+    for i in indexes:
+        sum_prices.append(city_data.target[i])
+    neighbor_avg = np.mean(sum_prices)
+    print "Nearest Neighbors average: " +str(neighbor_avg)
+
+    percent_diff = (abs(neighbor_avg - y)/neighbor_avg)*100
+    print "Percentage diff fromNearest Neighbors average: %4.2f" % percent_diff
+
 # In the case of the documentation page for GridSearchCV, it might be the case that the example is just a demonstration of syntax for use of the function, rather than a statement about
+
 
 def main():
     """Analyze the Boston housing data. Evaluate and validate the
@@ -240,6 +260,8 @@ def main():
 
     # Tune and predict Model
     fit_predict_model(city_data)
+
+
 
 
 if __name__ == "__main__":
