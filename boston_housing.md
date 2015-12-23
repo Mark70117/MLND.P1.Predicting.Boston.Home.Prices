@@ -42,10 +42,29 @@ perform well on just that one dataset.
 
 Scikit-learn's grid_search.GridSearchCV [2] was used to generate a
 final model.  GridSearchCV exhaustively searches the specified
-parameter space, max_depth from 1-10 in this case.  GridSearchCV
-also uses cross validation. The default value of 3 cross validations
-was used.  Cross validation helps identify overfitting of the data
-and also GridSearchCV to find the sweet spot of in the tradeoff of
+parameter space, max_depth from 1-10 in this case.
+
+In order for GridSearchCV to search the grid of the parameter space
+it needs to apply a performance metric it can use to compare one set
+of parameters against an other.  This requires further holding out
+a validation set of points and diminishes the training set.  Cross
+validation is a means of using data from the initial training set
+as both training data and performance evaluation data.  In K-fold
+validation, the data is used one time for performance evaluation and
+(K-1) times for training.  Thus the use of cross validation help
+maximize the use of the data.
+
+Cross validation also diminishes the possibility of overfitting that
+might occur is the training set was split into a single train and
+validation pair.  If just one split of the data was done, anomalies
+might heavily skew the training or performance measure.  With cross
+validation, the affect of anomalies are balanced out over the K
+validations.  Even in the absence of anomalies, cross validation
+helps prevent overfitting that might occur if a single training set
+was used. The default value of K=3 cross validations was used.
+
+Cross validation helps identify overfitting of the data and also
+helps GridSearchCV to find the sweet spot of in the tradeoff of
 predictive power and model complexity.
 
 ## Analyzing Model Performance
@@ -83,7 +102,7 @@ The mean/median/std of the predicted value were 20.76/20.97/1.095.
 The mean/mode of the max depth chosen by GridSearchCV were 5.8/4.
 
 There is some variation in the predicted value but it seems well
-centered around $20,800.  The RMSE of the model was approximently
+centered around $20,800.  The RMSE of the model was approximately
 $5,900.  So at the prediction could be used as a starting point for
 a realtor setting a listing price on a home.  Given the datasets
 mean of $22,530 and standard deviation of $9,190, the prediction
@@ -92,11 +111,11 @@ the data set, but given its location near the center of the data
 the prediction doesn't seem all that spectacular.
 
 
-## Notes 
-[1] 
+## Notes
+[1]
 [dataset archive](http://archive.ics.uci.edu/ml/datasets/Housing).  Harrison,
 D. and Rubinfeld, D.L.  'Hedonic prices and the demand for clean
-air', J. Environ. Economics & Management, vol.5, 81-102, 1978.  
+air', J. Environ. Economics & Management, vol.5, 81-102, 1978.
 [pdf of original paper](http://www.colorado.edu/ibs/crs/workshops/R_1-11-2012/root/Harrison_1978.pdf)
 
 [2]
