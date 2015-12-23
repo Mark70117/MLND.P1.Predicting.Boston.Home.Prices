@@ -89,14 +89,18 @@ specific data given instead of more generally modeling the feature
 space.
 
 Examining the Performance vs Training Size graph for max depth of
-1, the model shows signs of under fitting.  A larger training size
-produces more error, evidence that the additional data is overwhelming
-the ability of the model to capture the complexity, hence under
-fitting.
+1, the model shows signs of under fitting.  Both the training error
+and the test error are quite high (relative to the other values
+of max depth).  For the largest value of the training set the two
+are the same.  These features indicate a model that lacks the
+complexity to model the underlying data and is thus under fitting
+it.
 
 Examining the Performance vs Training Size graph for max depth of
 10, the model shows signs of over fitting.  A larger training size
-produces almost no error, evidence that the additional data is being
+produces almost no error.  As the training size increases to it
+largest values, the fluctuations in the test error increase in
+magnitude. This is evidence that the additional data is being
 incorporated into the model to such a degree that the model is of
 the data itself and not the feature space.
 
